@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+        <script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script type="text/babel">
+        let rootHandle = document.getElementById('root');
+        const books = [
+        {
+            title: 'The Design of EveryDay Things',
+            author: 'Don Norman',
+            alreadyRead: false
+        }, {
+            title: 'The Most Human Human',
+            author: 'Brian Christian',
+            alreadyRead: true
+        }
+        ];
+
+        let tagStyle1 = {
+            backgroundColor: 'green'
+        }
+        let tagStyle2 = {
+            backgroundColor: 'red'
+        }
+        function conditionTrue(props) {
+            if(props.alreadyRead){
+               return props.title; 
+            }
+        }
+
+        function conditionFalse(props) {
+            if(!props.alreadyRead){
+               return props.title; 
+            }
+        }
+
+        function Color(props){
+                return (
+                    <div>
+                        <p style={tagStyle1 }> {conditionTrue(props)} </p>
+                        <p style={tagStyle2}>{conditionFalse(props)} </p>
+                    </div>
+            )
+            }  
+
+            function BookList() {
+                return (
+                    <div>
+                        <ul>
+                            {books.map((book, index) => <Color title={book.title} author={book.author} alreadyRead={book.alreadyRead} /> )}
+                        </ul> 
+                    </div> 
+                )
+        }
+        ReactDOM.render(<BookList />, rootHandle); 
+        </script>
+    </body>
+</html>
+
+
