@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+
+    </title>
+    <script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+    <script type="text/babel">
+        let rootHandle = document.getElementById('root');
+        let emailEntered = '';
+        class Emails extends React.Component {
+            constructor(props) {
+            super(props); 
+                this.state = {
+                    emails: [
+                        { name: 'Eve', email: 'eve@gmail.com'}, 
+                        { name: 'brad', email: 'brad@gmail.com'}, 
+                        { name: 'adam', email: 'adam@gmail.com'}
+                            ],
+                    status: ``
+                }
+        this.deleteEmail = this.deleteEmail.bind(this); 
+    }
+    
+    
+    deleteEmail() {
+        this.state.emails.forEach((email,i) => {
+            if(email.email == emailEntered){
+                let index = i;
+                let removedElement = this.state.emails.splice(i,1);
+                    this.setState({
+                         emails: this.state.emails   
+                    })
+             }
+        else if(!(email.email == emailEntered)){
+                this.setState({
+            status: 'email not found' 
+        }) 
+            }
+        });
+        
+    }
+    
+    handleChange(e){
+        e.persist(); 
+        emailEntered = e.target.value;
+        console.log(emailEntered);
+    }
+
+    
+    render() {
+        return (
+            <div>
+                <table border='1'>
+                    <tr><th>Name</th><th>Email</th></tr>
+                    
+                        {this.state.emails.map((email, index) => <tbody> { buildTable(email,index)} </tbody> )} 
+                    
+                </table>
+                <h2>{this.state.status}</h2>    
+                    Email: <input type='text' name='email' onChange={this.handleChange.bind(this)} />
+                            <button onClick={this.deleteEmail.bind(this)}>Delete</button>
+            </div> 
+        )
+    }
+}
+
+            function buildTable(email, index) {
+                return (
+                    <tr>
+                        <td>{email.name}</td> 
+                        <td>{email.email}</td> 
+                    </tr>   
+                )
+            }
+            ReactDOM.render(<Emails />, rootHandle); 
+        </script>
+</body>
+
+</html>
