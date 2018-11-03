@@ -27,34 +27,7 @@
         }
         ];
 
-        let tagStyle1 = {
-            backgroundColor: 'green'
-        }
-        let tagStyle2 = {
-            backgroundColor: 'red'
-        }
-        function conditionTrue(props) {
-            if(props.alreadyRead){
-               return props.title; 
-            }
-        }
-
-        function conditionFalse(props) {
-            if(!props.alreadyRead){
-               return props.title; 
-            }
-        }
-
-        function Color(props){
-                return (
-                    <div>
-                        <p style={tagStyle1 }> {conditionTrue(props)} </p>
-                        <p style={tagStyle2}>{conditionFalse(props)} </p>
-                    </div>
-            )
-            }  
-
-            function BookList() {
+        function BookList() {
                 return (
                     <div>
                         <ul>
@@ -62,7 +35,42 @@
                         </ul> 
                     </div> 
                 )
+            }
+
+            function Color(props){
+                return (
+                    <div>
+                        <p style={tagStyle1 }> {conditionTrue(props)} </p>
+                        <p style={tagStyle2}>{conditionFalse(props)} </p>
+                    </div>
+            )
+            } 
+
+            function conditionTrue(props) {
+                if(props.alreadyRead){
+                    return props.title; 
+            }
+            } 
+
+            function conditionFalse(props) {
+                if(!props.alreadyRead){
+                    return props.title; 
+            }
         }
+
+        let tagStyle1 = {
+            backgroundColor: 'green'
+        }
+        let tagStyle2 = {
+            backgroundColor: 'red'
+        }
+      
+
+        
+
+        
+
+            
         ReactDOM.render(<BookList />, rootHandle); 
         </script>
     </body>
